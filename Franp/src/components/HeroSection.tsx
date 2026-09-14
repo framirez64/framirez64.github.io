@@ -23,9 +23,10 @@ function HeroSection() {
 
   return (
     <section className = "hero-section">
-      <div className="hero-wedge hero-wedge-sky" />
-      <div className="hero-wedge hero-wedge-ochre" />
-      <div className="hero-wedge hero-wedge-brick" />
+      {/* Position comes from hero-wedge-N, color from tone-*: swap either freely. */}
+      <div className="hero-wedge hero-wedge-1 tone-sky" />
+      <div className="hero-wedge hero-wedge-2 tone-ochre" />
+      <div className="hero-wedge hero-wedge-3 tone-brick" />
 
       <div className="hero-num">00</div>
       <div className="hero-label">No. 00 — Personal</div>

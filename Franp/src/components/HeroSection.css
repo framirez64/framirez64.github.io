@@ -22,20 +22,18 @@
   clip-path: polygon(28% 0, 100% 0, 72% 100%, 0 100%);
 }
 
-.hero-wedge-sky {
-  background: var(--sky);
+/* Position only — color arrives from a .tone-* class in the markup. */
+.hero-wedge-1 {
   left: 46%;
   right: -15%;
 }
 
-.hero-wedge-ochre {
-  background: var(--ochre);
+.hero-wedge-2 {
   left: 64%;
   right: -15%;
 }
 
-.hero-wedge-brick {
-  background: var(--brick);
+.hero-wedge-3 {
   left: 82%;
   right: -15%;
 }
@@ -195,17 +193,17 @@
   }
 
   /* Two wedges only — three crowd the wordmark at phone width. */
-  .hero-wedge-sky {
+  .hero-wedge-1 {
     left: 58%;
     right: -30%;
   }
 
-  .hero-wedge-ochre {
+  .hero-wedge-2 {
     left: 80%;
     right: -30%;
   }
 
-  .hero-wedge-brick {
+  .hero-wedge-3 {
     display: none;
   }
 
