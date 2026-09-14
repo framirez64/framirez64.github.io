@@ -1,86 +1,83 @@
-/* Update your section to use flexbox layout */
+/* ===========================================================
+   No. 01 — About
+   =========================================================== */
 section.about-section {
-  font-family: 'Solway', serif !important;
-  padding: 20px !important;
-  background-color: black !important;
-  min-height: calc(100vh - 60px); 
+  font-family: var(--font-display);
+  background-color: var(--paper);
+  color: var(--ink);
+  min-height: calc(100vh - var(--chrome-h));
   width: 100%;
+}
+
+.about-body {
   display: flex; 
-  gap: 40px; 
+  gap: 56px;
+  padding: 44px var(--axis-right) 80px var(--axis-left);
 }
 
 /* Sidebar styling */
 .about-sidebar {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  width: 150px; 
-  flex-shrink: 0; 
-  padding-top: 15%; 
+  width: 200px;
+  flex-shrink: 0;
+  align-self: flex-start; /* closing rule sits under the last row, not the pane */
+  border-bottom: var(--rule);
 }
 
-.about-sidebar-item {
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1.5rem;
-  padding: 4px 8px; 
-  color: #ccc;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%; 
-  box-sizing: border-box; 
-  min-width: 140px; /* Set minimum width to accommodate longest word */
-}
-
-.about-sidebar-item::after {
-  content: '• ';
-  color: #666;
-  transition: color 0.3s ease;
-  font-size: 1.5rem;
-  margin-left: 20px; /* Fixed spacing from text to dot */
-  flex-shrink: 0; /* Prevent dot from shrinking */
-}
-
-.about-sidebar-item.about-sidebar-active {
-  color: rgb(255, 255, 255);
-}
-
-.about-sidebar-item.about-sidebar-active::after {
-  color: white;
-}
-
-.about-sidebar-item:hover::after {
-  color: #aaa;
+.index-title {
+  font-size: 1.05rem;
 }
 
 .about-section-text {
-  flex: 1; 
+  flex: 1;
+  min-width: 0;
+  max-width: 720px;
   position: relative;
-  overflow: hidden;
-  display: flex;          
-  flex-direction: column; 
+  overflow: hidden; /* keeps the travelling gif from widening the page */
+  display: flex;
+  flex-direction: column;
+}
+
+.about-slug {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: var(--rule-thin);
+  color: var(--ink);
 }
 
 .about-section-text h1 {
-  font-family: 'Solway', serif;
+  font-family: var(--font-display);
   font-size: 2rem;
-  margin-bottom: 7px;
-  color: rgb(255, 255, 255);
-  position: relative; 
-  text-align: center;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  margin: 18px 0 6px;
+  color: var(--ink);
+  text-align: left;
+}
+
+.about-section-text p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--ink);
+  margin: 16px 0;
+  padding-top: 16px;
+  border-top: var(--hairline);
 }
 
 .esnupi-gif {
   position: relative;
-  top: 0; 
+  top: 0;
   left: 0;
   width: 50px;
   height: 50px;
   animation: moveAcross 4.6s linear infinite;
   z-index: 5;
-  margin-bottom: 10px;    
-  align-self: flex-start; 
+  margin-bottom: 10px;
+  align-self: flex-start;
 }
 .esnupi-gif img {
   width:80%;
@@ -92,10 +89,30 @@ section.about-section {
 @keyframes moveAcross {
     0% {
     left: -60px;
-    top: 10px; 
+    top: 10px;
     }
     100% {
     left: calc(100% + 60px);
-    top: 10px; 
+    top: 10px;
     }
+}
+
+@media (max-width: 768px) {
+  .about-body {
+    flex-direction: column;
+    gap: 28px;
+    padding: 28px var(--axis-right) 56px var(--axis-left);
+  }
+
+  .about-sidebar {
+    width: 100%;
+  }
+
+  .about-section-text h1 {
+    font-size: 1.6rem;
+  }
+
+  .about-section-text p {
+    font-size: 1rem;
+  }
 }

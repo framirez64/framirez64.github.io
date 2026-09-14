@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import './About.css'
+import SectionHead from './SectionHead'
 import esnupiGif from '../assets/esnupi.gif'
 function About() {
-  const [activeSection, setActiveSection] = useState<'intro' | 'background' | 'education' | 'interests'>('intro')
+  // Opens on 'background' so the index shows its selected row; 'intro' renders the same copy.
+  const [activeSection, setActiveSection] = useState<'intro' | 'background' | 'education' | 'interests'>('background')
 
   const aboutContent = {
     intro: {
+      code: '01.1',
       text: (
         <>
           <h1>About Me</h1>
@@ -15,6 +18,7 @@ function About() {
       )
     },
     background: {
+      code: '01.1',
       text: (
         <>
           <h1>About Me</h1>
@@ -24,6 +28,7 @@ function About() {
       )
     },
     education: {
+      code: '01.2',
       text: (
         <>
           <h1>Education</h1>
@@ -34,6 +39,7 @@ function About() {
       )
     },
     interests: {
+      code: '01.3',
       text: (
         <>
           <h1>Interests</h1>
@@ -45,35 +51,46 @@ function About() {
 
   return (
     <section className="about-section">
-      <div className="about-sidebar">
-        <div 
-          className={`about-sidebar-item ${activeSection === 'background' ? 'about-sidebar-active' : ''}`}
-          onClick={() => setActiveSection('background')}
-          onMouseEnter={() => setActiveSection('background')}
-        >
-          Background
+      <SectionHead number="01" label="No. 01 — About" left="terraverte" right="caracol" />
+
+      <div className="about-body">
+        <div className="about-sidebar">
+          <div
+            className={`index-item ${activeSection === 'background' ? 'is-active' : ''}`}
+            onClick={() => setActiveSection('background')}
+            onMouseEnter={() => setActiveSection('background')}
+          >
+            <span className="code">01.1</span>
+            <span className="index-title">Background</span>
+          </div>
+          <div
+            className={`index-item ${activeSection === 'education' ? 'is-active' : ''}`}
+            onClick={() => setActiveSection('education')}
+            onMouseEnter={() => setActiveSection('education')}
+          >
+            <span className="code">01.2</span>
+            <span className="index-title">Education</span>
+          </div>
+          <div
+            className={`index-item ${activeSection === 'interests' ? 'is-active' : ''}`}
+            onClick={() => setActiveSection('interests')}
+            onMouseEnter={() => setActiveSection('interests')}
+          >
+            <span className="code">01.3</span>
+            <span className="index-title">Interests</span>
+          </div>
         </div>
-        <div 
-          className={`about-sidebar-item ${activeSection === 'education' ? 'about-sidebar-active' : ''}`}
-          onClick={() => setActiveSection('education')}
-          onMouseEnter={() => setActiveSection('education')}
-        >
-          Education
-        </div>
-        <div 
-          className={`about-sidebar-item ${activeSection === 'interests' ? 'about-sidebar-active' : ''}`}
-          onClick={() => setActiveSection('interests')}
-          onMouseEnter={() => setActiveSection('interests')}
-        >
-          Interests
-        </div>
-      </div>
-      
-      <div className="about-section-text">
-        <div className="esnupi-gif">
+
+        <div className="about-section-text">
+          <div className="about-slug">
+            <span className="tick" />
+            <span className="code">No. {aboutContent[activeSection].code}</span>
+          </div>
+          <div className="esnupi-gif">
             <img src={esnupiGif} alt="red Baron"/>
+          </div>
+          {aboutContent[activeSection].text}
         </div>
-        {aboutContent[activeSection].text}
       </div>
     </section>
   )

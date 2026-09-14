@@ -1,3 +1,4 @@
+/* Local mono, kept as the offline fallback behind IBM Plex Mono. */
 @font-face {
   font-family: 'Roboto Mono';
   src: url('./assets/fonts/Roboto-Mono-regular.woff2') format('woff2');
@@ -6,10 +7,44 @@
   font-display: swap;
 }
 
+/* ===========================================================
+   System specification
+   Tokens, chrome, and the shared structural vocabulary.
+   =========================================================== */
 :root {
-  color-scheme: light dark;
-  color: white; 
-  background-color: #0F0F0F;
+  /* Color tokens — one project, one color. */
+  --ink: #1e1c19;
+  --paper: #efe6d4;
+  --brick: #c9492e;
+  --ochre: #e2a52b;
+  --sky: #3d7fa8;
+  --caracol: #6e3f5c;
+  --terraverte: #62804d;
+  --cinnabar: #c13225;
+
+  --ink-55: rgba(30, 28, 25, 0.55);
+  --ink-25: rgba(30, 28, 25, 0.25);
+  --ink-07: rgba(30, 28, 25, 0.07);
+  --paper-55: rgba(239, 230, 212, 0.55);
+
+  --rule: 3px solid var(--ink);
+  --rule-thin: 2px solid var(--ink);
+  --hairline: 1px solid var(--ink-25);
+
+  --font-display: 'Jost', 'Futura', 'Century Gothic', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Roboto Mono', ui-monospace, Consolas, monospace;
+
+  --ornament-h: 12px;
+  --nav-h: 60px;
+  --chrome-h: 72px; /* ornament + nav */
+
+  /* Left-weighted asymmetric axis: everything hangs off these. */
+  --axis-left: 8%;
+  --axis-right: 5%;
+
+  color-scheme: light;
+  color: var(--ink);
+  background-color: var(--paper);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -26,151 +61,412 @@
 }
 
 body {
-  font-family: 'Roboto Mono', monospace;
-  line-height: 1.5;
+  font-family: var(--font-display);
   font-weight: 400;
+  line-height: 1.5;
   min-height: 100vh;
+  background-color: var(--paper);
+  color: var(--ink);
 }
 
 #root {
   min-height: 100vh;
 }
 
+/* ---- shared structural devices --------------------------- */
+
+/* Exactly one 45°-style chamfer per card — never a border-radius. */
+.chamfer {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+/* Ornament bracket — opens and closes the page. */
+.ornament {
+  height: var(--ornament-h);
+  background: repeating-linear-gradient(90deg, var(--ink) 0 12px, transparent 12px 24px);
+}
+
+.ornament-paper {
+  background: repeating-linear-gradient(90deg, var(--paper) 0 12px, transparent 12px 24px);
+}
+
+/* Checkerboard strip — the closing bracket on long pages. */
+.checker {
+  display: flex;
+  height: 14px;
+}
+
+.checker span {
+  flex: 1;
+}
+
+.checker span:nth-child(odd) {
+  background: var(--ink);
+}
+
+.checker span:nth-child(even) {
+  background: var(--ochre);
+}
+
+/* Skewed brick tick — the system-wide accent. */
+.tick {
+  width: 18px;
+  height: 3px;
+  background: var(--brick);
+  transform: skewX(-30deg);
+}
+
+/* Accession code — "No. XX — Name". */
+.code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---- chrome: ornament bracket + nav ---------------------- */
 header {
-  background-color: #0F0F0F; 
-  position: relative; 
-  height: 60px;
-  width: 100%;
-  padding: 20px;
+  position: relative;
   z-index: 10;
+  width: 100%;
+  background-color: var(--ink);
+}
+
+nav {
+  position: relative;
+  height: var(--nav-h);
+  padding: 0 var(--axis-right) 0 var(--axis-left);
+  background-color: var(--ink);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav .nav-wedge {
+  position: absolute;
+  top: 0;
+  right: 120px;
+  width: 40px;
+  height: 100%;
+  background: var(--brick);
+  clip-path: polygon(40% 0, 100% 0, 60% 100%, 0 100%);
+}
+
+.nav-word {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--paper);
+  cursor: pointer;
+}
+
+.nav-word:hover {
+  color: var(--ochre);
 }
 
 /* Combined navigation styling */
 nav ul {
+  position: relative;
+  z-index: 2;
   display: flex;
   list-style: none;
   align-items: center;
-  width: 100%; 
+  gap: 28px;
 }
 
 nav li {
   margin: 0;
 }
 
-nav a {
-  color: white;
+nav ul a {
+  display: inline-block;
+  color: var(--paper);
   text-decoration: none;
-  font-family: 'Roboto Mono', monospace;
-  font-size: 18px;
-  padding: 8px 12px;
-  transition: opacity 0.3s ease;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
   cursor: pointer; /* Override global cursor for links */
 }
 
-nav a:hover {
-  opacity: 0.7;
-}
-
-/* Home icon styling */
-.home-icon {
-  width: 20px;
-  height: 20px;
-  filter: brightness(0) invert(1); 
-}
-
-/* Navigation spacing */
-nav li:first-child {
-  margin-right: auto; 
-}
-
-nav li:not(:first-child) {
-  flex: 1;
-  text-align: center;
+nav ul a:hover {
+  border-bottom-color: var(--brick);
 }
 
 /* Main content */
 main {
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - var(--chrome-h));
+  background-color: var(--paper);
 }
 
-
-
-/* Typography */
+/* ---- typography ------------------------------------------ */
 h1 {
-  font-size: 3rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.1;
   margin: 10px 0;
-  color: white;
+  color: var(--ink);
 }
 
 h2 {
-  font-size: 2.5rem;
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
   margin: 10px 0;
-  color: white;
-  opacity: 0.9;
+  color: var(--ink);
 }
 
 p {
-  font-size: 1.2rem;
-  margin: 20px 0;
-  color: white;
-  opacity: 0.8;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 18px 0;
+  color: var(--ink);
 }
 
-@media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  h1 {
-    font-size: 2rem;
-  }
-  
-  h2 {
-    font-size: 1.5rem;
-  }
+/* ---- section head: diagonal color split ------------------ */
+.section-head {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+  background-color: var(--paper);
 }
+
+.head-tri {
+  position: absolute;
+  inset: 0;
+}
+
+.head-tri-left {
+  clip-path: polygon(0 0, 68% 0, 38% 100%, 0 100%);
+}
+
+.head-tri-right {
+  clip-path: polygon(68% 0, 100% 0, 100% 100%, 38% 100%);
+}
+
+.head-label {
+  position: absolute;
+  top: 26px;
+  left: var(--axis-left);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--paper);
+}
+
+.head-num {
+  position: absolute;
+  right: 6%;
+  bottom: -60px;
+  font-size: 240px;
+  line-height: 0.8;
+  font-weight: 500;
+  color: var(--paper);
+}
+
+.head-dots {
+  position: absolute;
+  bottom: 26px;
+  left: var(--axis-left);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.head-dots span {
+  display: block;
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.head-dots span:nth-child(1),
+.head-dots span:nth-child(2) {
+  width: 16px;
+  height: 16px;
+}
+
+.head-dots span:nth-child(3),
+.head-dots span:nth-child(4) {
+  width: 11px;
+  height: 11px;
+}
+
+.head-dots span:nth-child(5),
+.head-dots span:nth-child(6) {
+  width: 6px;
+  height: 6px;
+}
+
+/* Every color token above needs a matching .tone-* rule here and an entry in
+   src/tones.ts before it can be used as a tone. All three, or it silently no-ops. */
+.tone-ink { background-color: var(--ink); }
+.tone-brick { background-color: var(--brick); }
+.tone-ochre { background-color: var(--ochre); }
+.tone-sky { background-color: var(--sky); }
+.tone-caracol { background-color: var(--caracol); }
+.tone-terraverte { background-color: var(--terraverte); }
+.tone-cinnabar { background-color: var(--cinnabar); }
+
+/* ---- shared sidebar index -------------------------------- */
+.index-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 0;
+  border-top: var(--rule);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-55);
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.index-item::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--brick);
+  transform: skewX(-30deg);
+  transition: width 0.25s ease;
+}
+
+.index-item:hover {
+  color: var(--ink);
+}
+
+.index-item:hover::before {
+  width: 12px;
+}
+
+.index-item.is-active {
+  color: var(--ink);
+}
+
+.index-item.is-active::before {
+  width: 22px;
+}
+
+/* ---- mobile ---------------------------------------------- */
 .menu-toggle {
   display: none;
-  font-size: 1.5rem;
+  position: relative;
+  z-index: 3;
+  font-size: 1.4rem;
+  line-height: 1;
   background: none;
   border: none;
-  color: white;
-  position: absolute;
-  left: 1rem; /* ⬅️ was right: 1rem */
-  top: 1rem;
-  z-index: 100;
+  color: var(--paper);
+  padding: 6px 0;
   cursor: pointer;
 }
 
-
 @media (max-width: 768px) {
+  :root {
+    --axis-left: 6%;
+    --axis-right: 6%;
+  }
+
   .menu-toggle {
     display: block;
   }
 
-  nav ul {
+  nav .nav-wedge {
     display: none;
-    flex-direction: column;
-    background: #0F0F0F;
-    position: absolute;
-    top: 60px;
-    left: 0; /* ⬅️ aligned under hamburger */
-    width: 200px;
-    padding: 20px;
-    z-index: 99;
-    border-right: 1px solid #333;
   }
 
+  nav ul {
+    display: none;
+    position: absolute;
+    top: var(--nav-h);
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 220px;
+    padding: 12px 20px;
+    background: var(--ink);
+    border-left: 3px solid var(--brick);
+    z-index: 99;
+  }
 
   nav ul.open {
     display: flex;
   }
 
   nav li {
-    text-align: left;
-    margin: 10px 0;
+    width: 100%;
+  }
+
+  nav ul a {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 13px;
+    border-bottom: 1px solid var(--paper-55);
+  }
+
+  nav ul li:last-child a {
+    border-bottom: none;
+  }
+
+  .section-head {
+    height: 150px;
+  }
+
+  .head-label {
+    top: 18px;
+    font-size: 11px;
+  }
+
+  .head-num {
+    bottom: -36px;
+    font-size: 150px;
+  }
+
+  .head-dots {
+    bottom: 18px;
+    gap: 6px;
+  }
+
+  .head-dots span:nth-child(1),
+  .head-dots span:nth-child(2) {
+    width: 11px;
+    height: 11px;
+  }
+
+  .head-dots span:nth-child(3),
+  .head-dots span:nth-child(4) {
+    width: 8px;
+    height: 8px;
+  }
+
+  .head-dots span:nth-child(5),
+  .head-dots span:nth-child(6) {
+    width: 5px;
+    height: 5px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
   }
 }

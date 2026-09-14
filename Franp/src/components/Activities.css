@@ -1,9 +1,39 @@
+/* ===========================================================
+   No. 05 — Activities
+   =========================================================== */
 section.activities-section {
-  font-family: 'Solway', serif !important;
-  padding: 20px !important;
-  background-color: black !important;
-  min-height: calc(100vh - 60px); 
+  font-family: var(--font-display);
+  background-color: var(--paper);
+  color: var(--ink);
+  min-height: calc(100vh - var(--chrome-h));
   width: 100%;
-  display: flex; 
-  gap: 40px; 
+  padding: 44px var(--axis-right) 80px var(--axis-left);
+}
+
+.activities-section h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+
+.activities-section p {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 16px 0 0;
+  padding-top: 18px;
+  border-top: var(--hairline);
+  color: var(--ink);
+}
+
+@media (max-width: 768px) {
+  section.activities-section {
+    padding: 28px var(--axis-right) 56px var(--axis-left);
+  }
+
+  .activities-section h1 {
+    font-size: 1.6rem;
+  }
 }

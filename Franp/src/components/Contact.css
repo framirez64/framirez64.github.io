@@ -1,25 +1,46 @@
+/* ===========================================================
+   No. 04 — Contact
+   =========================================================== */
 section.contact-section {
-  font-family: 'Solway', serif !important;
-  padding: 20px !important;
-  background-color: black !important;
-  min-height: calc(100vh - 60px);
+  font-family: var(--font-display);
+  background-color: var(--paper);
+  color: var(--ink);
+  min-height: calc(100vh - var(--chrome-h));
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.contact-body {
+  flex: 1;
+  padding: 44px var(--axis-right) 80px var(--axis-left);
+  max-width: 720px;
+}
+
+.contact-slug {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  color: white;
-  text-align: center;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: var(--rule-thin);
+}
+
+.contact-section h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 18px 0 32px;
+  color: var(--ink);
+  text-align: left;
 }
 
 .contact-card {
-  background-color: #1c1c1c;
-  padding: 20px 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  background-color: var(--paper);
+  border: var(--rule);
+  padding: 24px 28px 28px;
   width: 100%;
-  max-width: 500px; /* wider card */
+  max-width: 560px;
   transition: transform 0.2s ease;
 }
 
@@ -28,45 +49,79 @@ section.contact-section {
 }
 
 .contact-card h2 {
-  margin-bottom: 10px;
-  font-size: 1.5rem;
-}
-
-.contact-card p {
-  margin: 6px 0;
-  font-size: 1rem;
+  font-size: 1.35rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0 0 6px;
+  color: var(--ink);
 }
 
 .contact-field {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #2a2a2a;
-  padding: 10px 16px;
-  margin-top: 12px;
-  border-radius: 8px;
-  font-size: 1rem;
   gap: 12px;
+  padding: 14px 0;
+  margin: 0;
+  border-top: var(--hairline);
+  font-size: 0.95rem;
 }
 
 .contact-field span {
   flex: 1;
   word-break: break-word;
   text-align: left;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.contact-field span strong {
+  font-weight: 500;
+  color: var(--brick);
 }
 
 .contact-field button {
-  background-color: #444;
-  color: white;
+  background-color: var(--ink);
+  color: var(--paper);
   border: none;
-  border-radius: 6px;
-  padding: 6px 12px;
+  padding: 8px 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   cursor: pointer;
-  font-family: inherit;
   transition: background-color 0.2s ease;
   white-space: nowrap;
 }
 
 .contact-field button:hover {
-  background-color: #666;
+  background-color: var(--brick);
+}
+
+@media (max-width: 768px) {
+  .contact-body {
+    padding: 28px var(--axis-right) 56px var(--axis-left);
+  }
+
+  .contact-section h1 {
+    font-size: 1.6rem;
+    margin: 16px 0 24px;
+  }
+
+  .contact-card {
+    padding: 20px 20px 22px;
+  }
+
+  .contact-field {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .contact-field button {
+    align-self: flex-start;
+  }
 }

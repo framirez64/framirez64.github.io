@@ -1,4 +1,5 @@
 import './Contact.css';
+import SectionHead from './SectionHead';
 import { useState } from 'react';
 
 function Contact() {
@@ -17,24 +18,38 @@ function Contact() {
 
   return (
     <section className="contact-section">
-      <h1>Contact Me</h1>
+      <SectionHead number="04" label="No. 04 — Contact" left="caracol" right="brick" />
 
-      <div className="contact-card">
-        <h2>Francisco Ramirez</h2>
-
-        <div className="contact-field">
-          <span><strong>Email:</strong> {email}</span>
-          <button onClick={() => handleCopy(email, 'email')}>
-            {copied.field === 'email' ? 'Copied!' : 'Copy'}
-          </button>
+      <div className="contact-body">
+        <div className="contact-slug">
+          <span className="tick" />
+          <span className="code">No. 04 — Direct</span>
         </div>
 
-        <div className="contact-field">
-          <span><strong>Phone:</strong> {phone}</span>
-          <button onClick={() => handleCopy(phone, 'phone')}>
-            {copied.field === 'phone' ? 'Copied!' : 'Copy'}
-          </button>
+        <h1>Contact Me</h1>
+
+        <div className="contact-card chamfer">
+          <h2>Francisco Ramirez</h2>
+
+          <div className="contact-field">
+            <span><strong>Email:</strong> {email}</span>
+            <button onClick={() => handleCopy(email, 'email')}>
+              {copied.field === 'email' ? 'Copied!' : 'Copy'}
+            </button>
+          </div>
+
+          <div className="contact-field">
+            <span><strong>Phone:</strong> {phone}</span>
+            <button onClick={() => handleCopy(phone, 'phone')}>
+              {copied.field === 'phone' ? 'Copied!' : 'Copy'}
+            </button>
+          </div>
         </div>
+      </div>
+
+      <div className="checker">
+        <span /><span /><span /><span /><span /><span /><span /><span /><span /><span />
+        <span /><span /><span /><span /><span /><span /><span /><span /><span /><span />
       </div>
     </section>
   );
