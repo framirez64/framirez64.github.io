@@ -67,7 +67,7 @@ function Projects() {
 
   return (
     <section className="project-section">
-      <SectionHead number="02" label="No. 02 — Index, selected work" left="brick" right="sky" />
+      <SectionHead number="02" label="No. 02 — Index, selected work" left="ochre" right="cinnabar" />
 
       <div className="project-body">
         <div className="project-sidebar">

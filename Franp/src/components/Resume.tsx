@@ -113,7 +113,7 @@ function Resume() {
 
   return (
     <section className="resume-section">
-      <SectionHead number="03" label="No. 03 — Capability" left="sky" right="ink" />
+      <SectionHead number="03" label="No. 03 — Capability" left="ink" right="sky" />
 
       <div className="resume-body">
         <div className="resume-sidebar">
