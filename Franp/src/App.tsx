@@ -1,31 +1,55 @@
 import { useState } from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link, useLocation } from 'react-router-dom'
 import HeroSection from './components/HeroSection'
 import About from './components/About'
 import Projects from './components/Projects'
 import Resume from './components/Resume'
 import Contact from './components/Contact'
+import type { Tone } from './tones'
 import './App.css'
+
+/**
+ * Each route's tone is one of the two colors in that section's own header, so
+ * the nav wedge previews the section it points at.
+ */
+const NAV_ITEMS: { path: string; label: string; tone: Tone }[] = [
+  { path: '/about', label: '/about', tone: 'terraverte' },
+  { path: '/projects', label: '/projects', tone: 'cinnabar' },
+  { path: '/resume', label: '/resume', tone: 'sky' },
+  { path: '/contact', label: '/contact', tone: 'caracol' },
+]
+
+/** The landing page has no tab of its own — the wordmark is its destination. */
+const HOME_TONE: Tone = 'brick'
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { pathname } = useLocation()
 
   return (
     <>
       <header>
         <div className="ornament ornament-paper" />
         <nav>
-          <Link to="/" className="nav-word" onClick={() => setMenuOpen(false)}>
-            Francisco
-          </Link>
+          <div className="nav-brand">
+            <Link to="/" className="nav-word" onClick={() => setMenuOpen(false)}>
+              Francisco
+            </Link>
+            {pathname === '/' && <span className={`nav-wedge tone-${HOME_TONE}`} />}
+          </div>
           <ul className={menuOpen ? 'open' : ''}>
-            <li><Link to="/about" onClick={() => setMenuOpen(false)}>/about</Link></li>
-            <li><Link to="/projects" onClick={() => setMenuOpen(false)}>/projects</Link></li>
-            <li><Link to="/resume" onClick={() => setMenuOpen(false)}>/resume</Link></li>
-            <li><Link to="/contact" onClick={() => setMenuOpen(false)}>/contact</Link></li>
+            {NAV_ITEMS.map((item) => (
+              <li key={item.path}>
+                {pathname === item.path && (
+                  <span className={`nav-wedge tone-${item.tone}`} />
+                )}
+                <Link to={item.path} onClick={() => setMenuOpen(false)}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
           <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>☰</button>
-          <div className="nav-wedge" />
         </nav>
       </header>
 

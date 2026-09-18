@@ -143,14 +143,33 @@ nav {
   justify-content: space-between;
 }
 
+/* Route marker. Colour arrives from a .tone-* class in the markup, so the wedge
+   carries the tone of whichever section it sits beside. */
 nav .nav-wedge {
   position: absolute;
   top: 0;
-  right: 120px;
-  width: 40px;
-  height: 100%;
-  background: var(--brick);
+  bottom: 0;
+  width: 30px;
   clip-path: polygon(40% 0, 100% 0, 60% 100%, 0 100%);
+  pointer-events: none;
+}
+
+.nav-brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+}
+
+/* Landing page: the marker hangs off the wordmark, which is its destination. */
+.nav-brand .nav-wedge {
+  right: -46px;
+}
+
+/* Every other route: it sits in the gap immediately left of the active tab,
+   pointing at it, and never crosses the label. */
+nav li .nav-wedge {
+  left: -32px;
 }
 
 .nav-word {
@@ -176,11 +195,15 @@ nav ul {
   z-index: 2;
   display: flex;
   list-style: none;
-  align-items: center;
-  gap: 28px;
+  align-self: stretch;
+  align-items: stretch;
+  gap: 34px; /* wide enough to seat a 30px marker between two tabs */
 }
 
 nav li {
+  position: relative;
+  display: flex;
+  align-items: center;
   margin: 0;
 }
 
@@ -386,8 +409,14 @@ p {
     display: block;
   }
 
-  nav .nav-wedge {
+  .nav-brand .nav-wedge {
     display: none;
+  }
+
+  /* In the drawer the marker narrows to a skewed rule beside the active row. */
+  nav li .nav-wedge {
+    left: -14px;
+    width: 6px;
   }
 
   nav ul {
