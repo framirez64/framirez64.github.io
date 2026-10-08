@@ -5,7 +5,7 @@ section.activities-section {
   font-family: var(--font-display);
   background-color: var(--paper);
   color: var(--ink);
-  min-height: calc(100vh - var(--chrome-h));
+  min-height: var(--page-fill);
   width: 100%;
   padding: 44px var(--axis-right) 80px var(--axis-left);
 }

@@ -33,10 +33,16 @@
 
   --font-display: 'Jost', 'Futura', 'Century Gothic', sans-serif;
   --font-mono: 'IBM Plex Mono', 'Roboto Mono', ui-monospace, Consolas, monospace;
+  /* Deco display face — the hero surname only. Single weight (400). */
+  --font-deco: 'Poiret One', 'Jost', 'Futura', 'Century Gothic', sans-serif;
 
   --ornament-h: 12px;
   --nav-h: 60px;
-  --chrome-h: 72px; /* ornament + nav */
+  --chrome-h: 72px; /* top ornament + nav */
+
+  /* A full-bleed section fills what's left once BOTH ornaments are allowed for,
+     so the page lands at exactly 100vh and the closing ornament is on screen. */
+  --page-fill: calc(100vh - var(--chrome-h) - var(--ornament-h));
 
   /* Left-weighted asymmetric axis: everything hangs off these. */
   --axis-left: 8%;
@@ -88,24 +94,6 @@ body {
 
 .ornament-paper {
   background: repeating-linear-gradient(90deg, var(--paper) 0 12px, transparent 12px 24px);
-}
-
-/* Checkerboard strip — the closing bracket on long pages. */
-.checker {
-  display: flex;
-  height: 14px;
-}
-
-.checker span {
-  flex: 1;
-}
-
-.checker span:nth-child(odd) {
-  background: var(--ink);
-}
-
-.checker span:nth-child(even) {
-  background: var(--ochre);
 }
 
 /* Skewed brick tick — the system-wide accent. */
@@ -226,7 +214,7 @@ nav ul a:hover {
 
 /* Main content */
 main {
-  min-height: calc(100vh - var(--chrome-h));
+  min-height: var(--page-fill);
   background-color: var(--paper);
 }
 

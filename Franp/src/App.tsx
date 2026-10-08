@@ -9,17 +9,20 @@ import type { Tone } from './tones'
 import './App.css'
 
 /**
- * Each route's tone is one of the two colors in that section's own header, so
- * the nav wedge previews the section it points at.
+ * Each tone is the `right` tone of that section's SectionHead. The header
+ * splits 68%/38%, so the right-hand triangle is what sits directly under the
+ * nav links — the marker runs into that band instead of cutting across it.
+ * Change a page's SectionHead `right` tone and this table has to follow.
  */
 const NAV_ITEMS: { path: string; label: string; tone: Tone }[] = [
-  { path: '/about', label: '/about', tone: 'terraverte' },
+  { path: '/about', label: '/about', tone: 'caracol' },
   { path: '/projects', label: '/projects', tone: 'cinnabar' },
   { path: '/resume', label: '/resume', tone: 'sky' },
-  { path: '/contact', label: '/contact', tone: 'caracol' },
+  { path: '/contact', label: '/contact', tone: 'brick' },
 ]
 
-/** The landing page has no tab of its own — the wordmark is its destination. */
+/** The landing page has no tab and no band below the wordmark, so its marker
+ *  is a plain accent rather than a match — brick, like the hero's last wedge. */
 const HOME_TONE: Tone = 'brick'
 
 function App() {

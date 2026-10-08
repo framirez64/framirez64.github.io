@@ -46,11 +46,6 @@ function Contact() {
           </div>
         </div>
       </div>
-
-      <div className="checker">
-        <span /><span /><span /><span /><span /><span /><span /><span /><span /><span />
-        <span /><span /><span /><span /><span /><span /><span /><span /><span /><span />
-      </div>
     </section>
   );
 }

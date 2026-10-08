@@ -36,7 +36,7 @@ function HeroSection() {
 
       <div className="hero-inner">
         <div className="tick" />
-        <h2>Francisco 'Frank'</h2>
+        <h2>Francisco ‘Frank’</h2>
         <h1>
           <span>Jesús</span>
           <span>Ramírez-Reyna</span>
